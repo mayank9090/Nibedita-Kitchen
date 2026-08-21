@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nibedita Kitchen | Menu & Timings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-cream: #f7f2e8;
+      --card-bg: #ffffff;
+      --crimson-dark: #3b0505;
+      --crimson-main: #7a0c0c;
+      --gold-main: #c69214;
+      --gold-light: #e5b842;
+      --text-dark: #1f1412;
+      --text-muted: #6b5c56;
+      --border-gold: rgba(198, 146, 20, 0.3);
+      --shadow-premium: 0 15px 35px rgba(59, 5, 5, 0.08);
+      --veg-green: #27ae60;
+      --nonveg-red: #e53935;
+      --zomato-red: #e53935;
+      --zomato-bg: #f4f5f7;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+    body { background-color: var(--bg-cream); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+
+    /* Infinite Sliding Top Bar */
+    .custom-slider-bar {
+      background: linear-gradient(90deg, var(--crimson-dark) 0%, var(--crimson-main) 50%, var(--crimson-dark) 100%);
+      padding: 9px 0;
+      color: var(--gold-light);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+      position: relative;
+      border-bottom: 2px solid var(--gold-main);
+    }
+
+    .custom-slider-content {
+      display: inline-block;
+      padding-left: 100%;
+      animation: custom-slide 40s linear infinite;
+      white-space: nowrap;
+    }
+
+    .custom-slider-content span { display: inline-block; margin-right: 50px; }
+
+    @keyframes custom-slide {
+      from { transform: translateX(0%); }
+      to { transform: translateX(-100%); }
+    }
+
+    /* Navbar */
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 8%; background: rgba(247, 242, 232, 0.95);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-gold);
+      position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 2px solid var(--gold-main); box-shadow: 0 0 15px rgba(198, 146, 20, 0.25);
+    }
+    .brand-title {
+      font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 800;
+      color: var(--crimson-main); letter-spacing: 1.5px;
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 25px; }
+    nav ul { display: flex; list-style: none; gap: 25px; }
+    nav a { color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; }
+    nav a:hover { color: var(--gold-main); }
+
+    /* Cart Icon */
+    .zomato-cart-wrapper {
+      position: relative; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 8px; transition: transform 0.2s ease;
+    }
+    .zomato-cart-wrapper:hover { transform: scale(1.1); }
+    .zomato-bag-icon { font-size: 1.8rem; color: var(--crimson-main); filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15)); }
+
+    .zomato-badge {
+      position: absolute; top: 2px; right: 0px; background: #e53935; color: #ffffff;
+      font-size: 0.7rem; font-weight: 700; min-width: 18px; height: 18px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; padding: 2px; border: 2px solid var(--bg-cream); box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    /* Zomato-style Menu Cards */
+    .zomato-item-card { display: flex; justify-content: space-between; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid rgba(198, 146, 20, 0.2); gap: 12px; cursor: pointer; }
+    .zomato-item-card:last-child { border-bottom: none; }
+    .zomato-item-details { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+    .zomato-badge-container { display: flex; align-items: center; gap: 6px; }
+    
+    .veg-icon-square, .nonveg-icon-square {
+      width: 16px; height: 16px; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; background: #fff;
+    }
+    .veg-icon-square { border: 1.5px solid var(--veg-green); }
+    .nonveg-icon-square { border: 1.5px solid var(--nonveg-red); }
+    .veg-icon-square::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--veg-green); }
+    .nonveg-icon-square::after { content: ''; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 9px solid var(--nonveg-red); }
+
+    .zomato-item-title { font-weight: 600; font-size: 1rem; color: var(--text-dark); }
+    .zomato-item-price { font-weight: 600; font-size: 0.9rem; color: var(--crimson-main); }
+    .zomato-item-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.3; margin-top: 2px; }
+    .zomato-action-box { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 90px; margin-top: 5px; }
+
+    .btn-add-initial {
+      background: #fff; border: 1px solid var(--crimson-main); color: var(--crimson-main);
+      padding: 6px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      transition: all 0.2s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.08); text-transform: uppercase;
+    }
+    .btn-add-initial:hover { background: var(--crimson-main); color: #ffffff; }
+
+    /* Hero Banner Section */
+    .hero { position: relative; padding: 40px 20px 20px; text-align: center; background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(247,242,232,1) 100%); overflow: hidden; }
+    
+    /* Clean Hero FSSAI Header (No Box) */
+    .hero-fssai-wrapper {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .hero-fssai-logo {
+      width: 130px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+      margin-bottom: 6px;
+    }
+    .hero-fssai-lic {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--crimson-main);
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 { font-family: 'Cinzel', serif; font-size: 2.6rem; color: var(--crimson-main); letter-spacing: 2px; margin-bottom: 5px; }
+    .hero-sub { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--gold-main); margin-bottom: 20px; }
+
+    /* Categories Sticky Bar */
+    .zm-home-wrapper {
+      position: sticky; top: 75px; z-index: 900; background: rgba(247, 242, 232, 0.95);
+      backdrop-filter: blur(8px); max-width: 100%; padding: 10px 0 5px; border-bottom: 1px solid var(--border-gold);
+    }
+    .zm-categories-scroll { display: flex; justify-content: center; gap: 30px; overflow-x: auto; padding: 5px; scrollbar-width: none; }
+    .zm-categories-scroll::-webkit-scrollbar { display: none; }
+    .zm-cat-item { display: flex; flex-direction: column; align-items: center; min-width: 80px; cursor: pointer; transition: transform 0.2s ease; user-select: none; }
+    .zm-cat-icon-box {
+      width: 65px; height: 65px; border-radius: 50%; background: #ffffff; border: 2px solid var(--gold-main);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08); margin-bottom: 8px; display: flex; align-items: center; justify-content: center;
+      color: var(--crimson-main); font-size: 1.5rem; transition: all 0.3s ease;
+    }
+    .zm-cat-item.active .zm-cat-icon-box { background: var(--crimson-main); color: var(--gold-light); border-color: var(--gold-light); box-shadow: 0 6px 15px rgba(122, 12, 12, 0.3); transform: scale(1.08); }
+    .zm-cat-label { font-size: 0.85rem; font-weight: 600; color: #333; text-align: center; }
+
+    /* Timings Section */
+    .timings-wrapper { display: flex; justify-content: center; gap: 20px; max-width: 1100px; margin: 0 auto 20px; flex-wrap: wrap; }
+    .timing-card { background: #ffffff; border: 1px solid var(--border-gold); border-radius: 12px; padding: 12px 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); min-width: 240px; }
+    .timing-card h4 { font-family: 'Cinzel', serif; color: var(--crimson-main); font-size: 0.95rem; margin-bottom: 3px; }
+    .timing-card p { color: var(--gold-main); font-weight: 700; font-size: 0.9rem; }
+
+    .btn-hero { background: linear-gradient(135deg, var(--crimson-main) 0%, var(--crimson-dark) 100%); color: #ffffff; padding: 12px 35px; border: 1px solid var(--gold-main); border-radius: 30px; font-size: 0.95rem; font-weight: 600; letter-spacing: 1px; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: 0 8px 25px rgba(122, 12, 12, 0.3); transition: all 0.3s ease; }
+    .btn-hero:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(122, 12, 12, 0.4); }
+
+    /* Menu Grid */
+    .menu-section { padding: 30px 4%; max-width: 1400px; margin: 0 auto; }
+    .section-title { text-align: center; font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--crimson-main); margin-bottom: 25px; }
+    
+    .menu-grid-slider { display: flex; gap: 25px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 20px; scrollbar-width: thin; scrollbar-color: var(--gold-main) transparent; }
+    .menu-grid-slider::-webkit-scrollbar { height: 6px; }
+    .menu-grid-slider::-webkit-scrollbar-thumb { background-color: var(--gold-main); border-radius: 10px; }
+
+    .menu-category-card { flex: 0 0 88%; max-width: 420px; scroll-snap-align: center; background: var(--card-bg); border: 1.5px solid var(--border-gold); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-premium); }
+    @media (min-width: 1024px) { .menu-category-card { flex: 0 0 calc(33.333% - 18px); max-width: none; } }
+
+    .category-header { background: linear-gradient(135deg, var(--crimson-main) 0%, var(--crimson-dark) 100%); color: var(--gold-light); padding: 18px; text-align: center; border-bottom: 2px solid var(--gold-main); }
+    .category-header h3 { font-family: 'Cinzel', serif; font-size: 1.4rem; letter-spacing: 1px; }
+    .category-header span { font-size: 0.8rem; color: #dfc8bc; font-family: 'Poppins', sans-serif; }
+    .item-list { list-style: none; padding: 20px 25px; }
+
+    /* FAQ SECTION STYLES */
+    .faq-section { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    .faq-container { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { background: #ffffff; border: 1px solid var(--border-gold); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.03); transition: all 0.3s ease; }
+    .faq-question { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; color: var(--crimson-dark); font-size: 0.95rem; }
+    .faq-question i { color: var(--gold-main); transition: transform 0.3s ease; }
+    .faq-answer { max-height: 0; overflow: hidden; padding: 0 20px; color: var(--text-muted); font-size: 0.88rem; transition: max-height 0.3s ease, padding 0.3s ease; line-height: 1.5; }
+    .faq-item.active .faq-answer { max-height: 180px; padding: 0 20px 16px 20px; }
+    .faq-item.active .faq-question i { transform: rotate(180deg); }
+
+    /* Dynamic Item Modal */
+    .zomato-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 3000; justify-content: center; align-items: flex-end; }
+    @media(min-width: 600px) { .zomato-modal-overlay { align-items: center; } }
+    .zomato-modal-container { background: #f4f5f7; width: 100%; max-width: 480px; max-height: 90vh; border-top-left-radius: 20px; border-top-right-radius: 20px; overflow-y: auto; position: relative; box-shadow: 0 -5px 25px rgba(0,0,0,0.2); }
+    @media(min-width: 600px) { .zomato-modal-container { border-radius: 20px; } }
+    .zomato-modal-close-btn { position: absolute; top: 15px; right: 15px; width: 32px; height: 32px; background: rgba(0,0,0,0.6); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; font-size: 1rem; }
+    .zomato-modal-hero-img { width: 100%; height: 180px; object-fit: cover; display: block; }
+    .zomato-modal-body { padding: 16px; }
+    .zomato-modal-card-box { background: #ffffff; border-radius: 14px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+    .zomato-modal-item-title { font-size: 1.15rem; font-weight: 700; color: #1c1c1c; margin-top: 4px; }
+    .zomato-tag-reordered { display: inline-block; background: #eef7f2; color: #15803d; font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin: 6px 0; }
+    .zomato-modal-item-desc { font-size: 0.8rem; color: #666; line-height: 1.4; }
+    .zomato-section-title { font-size: 0.95rem; font-weight: 700; color: #1c1c1c; margin-bottom: 4px; }
+    .zomato-section-sub { font-size: 0.75rem; color: #888; margin-bottom: 12px; }
+    .zomato-option-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+    .zomato-option-row:last-child { border-bottom: none; }
+    .zomato-radio-label { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; font-weight: 500; color: #333; cursor: pointer; }
+    
+    .zomato-bottom-bar { position: sticky; bottom: 0; background: #ffffff; padding: 12px 16px; display: flex; align-items: center; gap: 12px; border-top: 1px solid #eee; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); }
+    .zomato-qty-box { display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--zomato-red); background: #fff5f5; border-radius: 8px; width: 100px; height: 44px; padding: 0 8px; }
+    .zomato-qty-btn { background: none; border: none; color: var(--zomato-red); font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+    .zomato-qty-num { font-weight: 700; color: var(--zomato-red); font-size: 0.95rem; }
+    .zomato-add-item-btn { flex: 1; background: var(--zomato-red); color: #ffffff; border: none; height: 44px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(229, 57, 53, 0.3); }
+
+    /* CHECKOUT POPUP UI */
+    .checkout-modal-overlay {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); z-index: 4000;
+      justify-content: center; align-items: flex-end;
+    }
+    @media(min-width: 600px) { .checkout-modal-overlay { align-items: center; } }
+
+    .checkout-modal-container {
+      background: #f4f5f7; width: 100%; max-width: 480px; max-height: 92vh;
+      border-top-left-radius: 20px; border-top-right-radius: 20px; overflow-y: auto;
+      position: relative; box-shadow: 0 -8px 30px rgba(0,0,0,0.25); display: flex; flex-direction: column;
+    }
+    @media(min-width: 600px) { .checkout-modal-container { border-radius: 20px; height: 85vh; } }
+
+    .checkout-close-circle {
+      position: absolute; top: 12px; right: 12px; width: 30px; height: 30px;
+      background: #2c2f36; color: #fff; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center; cursor: pointer; font-size: 0.85rem; z-index: 20;
+    }
+
+    .checkout-body { padding: 16px 14px 14px; flex: 1; overflow-y: auto; }
+
+    /* Card Box Styles */
+    .chk-card {
+      background: #ffffff; border-radius: 14px; padding: 16px; margin-bottom: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    /* 1. ITEM CARDS WITH STEPPER */
+    .chk-item-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0; border-bottom: 1px dashed #e0e0e0;
+    }
+    .chk-item-row:last-child { border-bottom: none; }
+    .chk-item-left { display: flex; gap: 10px; align-items: flex-start; flex: 1; }
+    .chk-item-title { font-size: 0.9rem; font-weight: 600; color: #2c2f36; }
+    .chk-item-meta { font-size: 0.75rem; color: #777; margin-top: 2px; }
+
+    .chk-stepper {
+      display: flex; align-items: center; justify-content: space-between;
+      border: 1px solid #e53935; background: #fff5f5; border-radius: 6px;
+      width: 72px; height: 30px; padding: 0 6px; margin-right: 12px;
+    }
+    .chk-step-btn { background: none; border: none; color: #e53935; font-weight: 700; font-size: 0.95rem; cursor: pointer; }
+    .chk-step-val { font-size: 0.85rem; font-weight: 700; color: #e53935; }
+
+    .chk-item-price { font-size: 0.9rem; font-weight: 700; color: #1c1c1c; text-align: right; min-width: 50px; }
+
+    .chk-add-more {
+      color: #e53935; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; gap: 6px; margin-top: 10px;
+    }
+
+    /* DELIVERY & ADDRESS SECTION & BILL DETAILS */
+    .info-row {
+      display: flex; align-items: flex-start; gap: 12px; padding: 12px 0;
+      border-bottom: 1px dashed #eee; font-size: 0.85rem; color: #333;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-icon { font-size: 1.1rem; color: #555; margin-top: 2px; width: 20px; text-align: center; }
+    .info-content { flex: 1; }
+    .info-title { font-weight: 600; color: #1c1c1c; }
+    .info-sub { color: #666; font-size: 0.78rem; margin-top: 2px; }
+    .info-link { color: #e53935; font-weight: 600; font-size: 0.78rem; cursor: pointer; display: inline-block; margin-top: 4px; text-decoration: underline; }
+
+    /* Schedule options container */
+    .schedule-options-box {
+      display: none; margin-top: 8px; background: #fafafa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 8px;
+    }
+    .schedule-option-item {
+      padding: 6px 10px; font-size: 0.82rem; font-weight: 500; color: #333; cursor: pointer; border-radius: 4px; transition: background 0.2s;
+    }
+    .schedule-option-item:hover { background: #f0f0f0; color: #e53935; font-weight: 600; }
+
+    /* Inline Editors for Interactive Inputs */
+    .edit-input-box { display: none; margin-top: 8px; }
+    .edit-input-box input, .edit-input-box select {
+      width: 100%; padding: 6px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.85rem; margin-bottom: 6px;
+    }
+    .edit-input-box button {
+      background: #7a0c0c; color: #fff; border: none; padding: 4px 12px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; cursor: pointer;
+    }
+
+    /* CANCELLATION POLICY */
+    .cancellation-policy {
+      font-size: 0.72rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px;
+      margin: 10px 0 15px; padding: 0 4px; line-height: 1.4;
+    }
+
+    /* STICKY BOTTOM CHECKOUT BAR */
+    .checkout-bottom-bar {
+      position: sticky; bottom: 0; background: #ffffff; padding: 12px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid #e0e0e0; box-shadow: 0 -4px 15px rgba(0,0,0,0.06); z-index: 10;
+    }
+    .pay-using-box { display: flex; flex-direction: column; }
+    .pay-using-title { font-size: 0.68rem; text-transform: uppercase; color: #888; font-weight: 700; letter-spacing: 0.5px; }
+    .pay-using-method { font-size: 0.85rem; font-weight: 700; color: #1c1c1c; display: flex; align-items: center; gap: 6px; }
+
+    .btn-place-order {
+      background: var(--zomato-red); color: #ffffff; border: none;
+      padding: 10px 22px; border-radius: 10px; font-weight: 700; font-size: 0.95rem;
+      cursor: pointer; display: flex; align-items: center; gap: 8px;
+      box-shadow: 0 4px 12px rgba(229, 57, 53, 0.35); text-decoration: none;
+    }
+    .btn-place-order:hover { background: #d32f2f; }
+
+    /* Footer */
+    footer { background: linear-gradient(180deg, var(--crimson-main) 0%, var(--crimson-dark) 100%); color: #ffffff; padding: 50px 8% 25px; border-top: 4px solid var(--gold-main); }
+    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto 40px; }
+    .footer-box h4 { font-family: 'Cinzel', serif; color: var(--gold-light); font-size: 1.1rem; margin-bottom: 15px; }
+    
+    /* FSSAI Badge Design */
+    .fssai-badge-box {
+      border: 1.5px solid var(--gold-main);
+      padding: 12px 16px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    .footer-bottom { text-align: center; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: #d1b8ab; }
+
+    @media (max-width: 768px) { nav { display: none; } .hero h1 { font-size: 2.2rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="custom-slider-bar">
+    <div class="custom-slider-content">
+      <span>🎉 FSSAI CERTIFIED KITCHEN ❤️</span>
+      <span>🔥 FRESH & HYGIENIC HOMELY MEALS ⏳</span>
+      <span>❤️ GOOD FOOD, GOOD MOOD! 🍛✨</span>
+      <span>📞 CALL OR WHATSAPP TO ORDER NOW: +91-7846986313 , +91 7894984976 🚀</span>
+      <span>🎉 FSSAI CERTIFIED KITCHEN ❤️</span>
+      <span>🔥 FRESH & HYGIENIC HOMELY MEALS ⏳</span>
+      <span>❤️ GOOD FOOD, GOOD MOOD! 🍛✨</span>
+      <span>📞 CALL OR WHATSAPP TO ORDER NOW: +91-7846986313 , +91-7894984976 🚀</span>
+    </div>
+  </div>
+
+  <header>
+    <div class="brand">
+      <img src="https://i.postimg.cc/Lsq8MZ2f/1000426086-removebg-preview.png" alt="Nibedita Kitchen Logo" />
+      <span class="brand-title">Nibedita Kitchen</span>
+    </div>
+    <div class="nav-right">
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#faq">FAQs</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="zomato-cart-wrapper" onclick="openCheckoutModal()">
+        <i class="fa-solid fa-bag-shopping zomato-bag-icon"></i>
+        <span class="zomato-badge" id="cartCount">0</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-fssai-wrapper">
+      <img src="https://i.postimg.cc/4NF7cGLz/1000426082-removebg-preview.png" alt="FSSAI Logo" class="hero-fssai-logo" />
+      <span class="hero-fssai-lic">Lic No: 22026004000383</span>
+    </div>
+    
+    <h1>Nibedita Kitchen</h1>
+    <div class="hero-sub">Fresh & Pure Homely Meals</div>
+    <div class="timings-wrapper">
+      <div class="timing-card"><h4>Breakfast Timing</h4><p>7:00 AM – 10:30 AM</p></div>
+      <div class="timing-card"><h4>Lunch Timing</h4><p>12:30 PM – 3:30 PM</p></div>
+      <div class="timing-card"><h4>Dinner Timing</h4><p>7:30 PM – 9:30 PM</p></div>
+    </div>
+    <a href="https://wa.me/919078776313?text=Hello%20Nibedita%20Kitchen%2C%20I%20want%20to%20order%20the%20Trial%20Pack%20%40%20%E2%82%B9150." target="_blank" class="btn-hero">Order Trial Pack @ ₹150</a>
+  </section>
+
+  <!-- ROUND CATEGORIES STICKY NAV -->
+  <div class="zm-home-wrapper">
+    <div class="zm-categories-scroll">
+      <div class="zm-cat-item active" id="tab-BREAKFAST" onclick="scrollToCategory('cat-BREAKFAST')">
+        <div class="zm-cat-icon-box"><i class="fa-solid fa-mug-hot"></i></div>
+        <div class="zm-cat-label">Breakfast</div>
+      </div>
+      <div class="zm-cat-item" id="tab-LUNCH" onclick="scrollToCategory('cat-LUNCH')">
+        <div class="zm-cat-icon-box"><i class="fa-solid fa-bowl-rice"></i></div>
+        <div class="zm-cat-label">Lunch</div>
+      </div>
+      <div class="zm-cat-item" id="tab-DINNER" onclick="scrollToCategory('cat-DINNER')">
+        <div class="zm-cat-icon-box"><i class="fa-solid fa-utensils"></i></div>
+        <div class="zm-cat-label">Dinner</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENU SECTION -->
+  <section class="menu-section" id="menu">
+    <h2 class="section-title">Our Menu</h2>
+    
+    <div class="menu-grid-slider" id="menuSlider">
+      
+      <!-- Breakfast Category Card -->
+      <div class="menu-category-card" id="cat-BREAKFAST" data-cat="BREAKFAST">
+        <div class="category-header"><h3>BREAKFAST</h3><span>7:00 AM – 10:30 AM</span></div>
+        <ul class="item-list">
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Puri', 10, 20, 'veg', 'Freshly prepared hot puris served with delicious homestyle curry.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Puri</div>
+                <div class="zomato-item-price">₹10 (3 Pieces) / ₹20 (6 Pieces)</div>
+                <div class="zomato-item-desc">Freshly prepared hot puris served with delicious homestyle curry.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Paratha', 20, 25, 'veg', 'Soft, warm tawa paratha made fresh with pure ingredients.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Paratha</div>
+                <div class="zomato-item-price">₹20 (4 Pieces) / ₹25 (6 Pieces)</div>
+                <div class="zomato-item-desc">Soft, warm tawa paratha made fresh with pure ingredients.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Aloo Paratha', 30, 50, 'veg', 'Delicious stuffed potato parathas served fresh with homestyle chutney.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Aloo Paratha</div>
+                <div class="zomato-item-price">₹30 (3 Pieces) / ₹50 (6 Pieces)</div>
+                <div class="zomato-item-desc">Delicious stuffed potato parathas served fresh with homestyle chutney.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Onion Paratha', 20, 40, 'veg', 'Flavorful onion-stuffed parathas cooked on hot tawa.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Onion Paratha</div>
+                <div class="zomato-item-price">₹20 (3 Pieces) / ₹40 (5 Pieces)</div>
+                <div class="zomato-item-desc">Flavorful onion-stuffed parathas cooked on hot tawa.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Chicken Paratha', 40, 60, 'nonveg', 'Richly stuffed chicken parathas spiced to perfection.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Chicken Paratha</div>
+                <div class="zomato-item-price">₹40 (3 Pieces) / ₹60 (5 Pieces)</div>
+                <div class="zomato-item-desc">Richly stuffed chicken parathas spiced to perfection.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Bread Omelette', 40, 60, 'nonveg', 'Fresh eggs whipped with onions and herbs, toasted with soft bread.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Bread Omelette</div>
+                <div class="zomato-item-price">₹40 (3 Pieces) / ₹60 (5 Pieces)</div>
+                <div class="zomato-item-desc">Fresh eggs whipped with onions and herbs, toasted with soft bread.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Dal Puri', 20, 40, 'veg', 'Crispy puris stuffed with savory spiced lentil filling.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Dal Puri</div>
+                <div class="zomato-item-price">₹20 (3 Pieces) / ₹40 (5 Pieces)</div>
+                <div class="zomato-item-desc">Crispy puris stuffed with savory spiced lentil filling.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Upma', 20, 35, 'veg', 'Healthy roasted semolina cooked with mild vegetables and mustard seeds.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Upma</div>
+                <div class="zomato-item-price">₹20 (Half) / ₹35 (Full)</div>
+                <div class="zomato-item-desc">Healthy roasted semolina cooked with mild vegetables and mustard seeds.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Idli', 15, 30, 'veg', 'Soft steamed rice cakes served hot with curry or chutney.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Idli</div>
+                <div class="zomato-item-price">₹15 (2 Pieces) / ₹30 (4 Pieces)</div>
+                <div class="zomato-item-desc">Soft steamed rice cakes served hot with curry or chutney.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Poha', 20, 35, 'veg', 'Flattened rice tempered with peanuts, curry leaves, and subtle spices.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Poha</div>
+                <div class="zomato-item-price">₹20 (Half) / ₹35 (Full)</div>
+                <div class="zomato-item-desc">Flattened rice tempered with peanuts, curry leaves, and subtle spices.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Chole Bhature', 30, 30, 'veg', 'Hot fluffy bhatures served with rich flavorful chickpea curry.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Chole Bhature</div>
+                <div class="zomato-item-price">₹30 (1 Plate / 2 Bhature + Curry)</div>
+                <div class="zomato-item-desc">Hot fluffy bhatures served with rich flavorful chickpea curry.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Ruti', 10, 20, 'veg', 'Soft handmade wheat roti, rich in wholesome nutrition.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Ruti</div>
+                <div class="zomato-item-price">₹10 (4 Pieces) / ₹20 (6 Pieces)</div>
+                <div class="zomato-item-desc">Soft handmade wheat roti, rich in wholesome nutrition.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Chakuli', 10, 20, 'veg', 'Traditional Odia soft rice pitha cooked fresh on order.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Chakuli</div>
+                <div class="zomato-item-price">₹10 (2 Pieces) / ₹20 (5 Pieces)</div>
+                <div class="zomato-item-desc">Traditional Odia soft rice pitha cooked fresh on order.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Lunch Category Card -->
+      <div class="menu-category-card" id="cat-LUNCH" data-cat="LUNCH">
+        <div class="category-header"><h3>LUNCH</h3><span>12:30 PM – 3:30 PM</span></div>
+        <ul class="item-list">
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Veg Dalma', 50, 70, 'veg', 'Authentic Odia dalma loaded with fresh vegetables and tempered spices.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Veg Dalma</div>
+                <div class="zomato-item-price">₹50 (Half) / ₹70 (Full)</div>
+                <div class="zomato-item-desc">Authentic Odia dalma loaded with fresh vegetables and tempered spices.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Soyabean Curry', 40, 60, 'veg', 'Protein-rich soyabean chunks simmered in savory homestyle curry.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Soyabean Curry</div>
+                <div class="zomato-item-price">₹40 (Half) / ₹60 (Full)</div>
+                <div class="zomato-item-desc">Protein-rich soyabean chunks simmered in savory homestyle curry.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <!-- Newly Added Lunch Items -->
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Egg Manchurian', 50, 90, 'nonveg', 'Crispy fried egg balls tossed in tangy Indo-Chinese Manchurian sauce.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Egg Manchurian</div>
+                <div class="zomato-item-price">₹50 (Half) / ₹90 (Full)</div>
+                <div class="zomato-item-desc">Crispy fried egg balls tossed in tangy Indo-Chinese Manchurian sauce.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Egg Fried Rice', 40, 60, 'nonveg', 'Aromatic basmati rice stir-fried with scrambled eggs, veggies, and spices.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Egg Fried Rice</div>
+                <div class="zomato-item-price">₹40 (Half) / ₹60 (Full)</div>
+                <div class="zomato-item-desc">Aromatic basmati rice stir-fried with scrambled eggs, veggies, and spices.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Egg Chilli', 50, 90, 'nonveg', 'Spicy and flavorful egg tossed with capsicum, onion, and chilli sauce.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Egg Chilli</div>
+                <div class="zomato-item-price">₹50 (Half) / ₹90 (Full)</div>
+                <div class="zomato-item-desc">Spicy and flavorful egg tossed with capsicum, onion, and chilli sauce.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Fish Curry', 60, 110, 'nonveg', 'Fresh river fish slow-cooked in traditional Odia mustard curry or gravy.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Fish Curry</div>
+                <div class="zomato-item-price">₹60 (Half) / ₹110 (Full)</div>
+                <div class="zomato-item-desc">Fresh river fish slow-cooked in traditional Odia mustard curry or gravy.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Chicken Curry', 70, 130, 'nonveg', 'Homestyle savory chicken curry prepared with aromatic roasted spices.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Chicken Curry</div>
+                <div class="zomato-item-price">₹70 (Half) / ₹130 (Full)</div>
+                <div class="zomato-item-desc">Homestyle savory chicken curry prepared with aromatic roasted spices.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Mutton Curry', 140, 260, 'nonveg', 'Tender goat meat slow-cooked in rich Odia style spicy gravy.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Mutton Curry</div>
+                <div class="zomato-item-price">₹140 (Half) / ₹260 (Full)</div>
+                <div class="zomato-item-desc">Tender goat meat slow-cooked in rich Odia style spicy gravy.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Besan Curry', 35, 60, 'veg', 'Traditional gram flour gatta dumplings simmered in tangy curry.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Besan Curry</div>
+                <div class="zomato-item-price">₹35 (Half) / ₹60 (Full)</div>
+                <div class="zomato-item-desc">Traditional gram flour gatta dumplings simmered in tangy curry.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Veg Thali', 60, 60, 'veg', 'Complete wholesome meal with Rice, Dal/Dalma, Bhaja, Veg Curry & Salad.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Veg Thali</div>
+                <div class="zomato-item-price">₹60 (Full Thali)</div>
+                <div class="zomato-item-desc">Complete wholesome meal with Rice, Dal/Dalma, Bhaja, Veg Curry & Salad.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Paneer Curry', 60, 110, 'veg', 'Soft fresh paneer cubes cooked in rich tomato and onion gravy.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Paneer Curry</div>
+                <div class="zomato-item-price">₹60 (Half) / ₹110 (Full)</div>
+                <div class="zomato-item-desc">Soft fresh paneer cubes cooked in rich tomato and onion gravy.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Chicken Biriyani', 90, 160, 'nonveg', 'Aromatic long-grain basmati rice cooked with succulent chicken and spices.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Chicken Biriyani</div>
+                <div class="zomato-item-price">₹90 (Half) / ₹160 (Full)</div>
+                <div class="zomato-item-desc">Aromatic long-grain basmati rice cooked with succulent chicken and spices.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Egg Biriyani', 70, 120, 'nonveg', 'Flavorful dum biryani rice served with spiced boiled eggs and raita.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Egg Biriyani</div>
+                <div class="zomato-item-price">₹70 (Half) / ₹120 (Full)</div>
+                <div class="zomato-item-desc">Flavorful dum biryani rice served with spiced boiled eggs and raita.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Mutton Biriyani', 160, 290, 'nonveg', 'Rich fragrant basmati biryani layered with tender mutton pieces.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Mutton Biriyani</div>
+                <div class="zomato-item-price">₹160 (Half) / ₹290 (Full)</div>
+                <div class="zomato-item-desc">Rich fragrant basmati biryani layered with tender mutton pieces.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Dinner Category Card -->
+      <div class="menu-category-card" id="cat-DINNER" data-cat="DINNER">
+        <div class="category-header"><h3>DINNER</h3><span>7:30 PM – 9:30 PM</span></div>
+        <ul class="item-list">
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Egg Tadka', 45, 80, 'nonveg', 'Flavorful lentils cooked with scrambled egg and aromatic tadka.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Egg Tadka</div>
+                <div class="zomato-item-price">₹45 (Half) / ₹75 (Full)</div>
+                <div class="zomato-item-desc">Flavorful lentils cooked with scrambled egg and aromatic tadka.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Paneer Curry', 60, 110, 'veg', 'Soft cottage cheese cubes cooked in rich gravy with subtle spices.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Paneer Curry</div>
+                <div class="zomato-item-price">₹70 (Half) / ₹110 (Full)</div>
+                <div class="zomato-item-desc">Soft cottage cheese cubes cooked in rich gravy with subtle spices.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Chicken Kasa', 80, 140, 'nonveg', 'Juicy chicken pieces slow-cooked in thick spicy gravy.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Chicken Kasa</div>
+                <div class="zomato-item-price">₹80 (Half) / ₹140 (Full)</div>
+                <div class="zomato-item-desc">Juicy chicken pieces slow-cooked in thick spicy gravy.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <!-- Newly Added Dinner Items -->
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Ruti', 10, 20, 'veg', 'Hot and soft handmade wheat rotis prepared fresh on order.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Ruti</div>
+                <div class="zomato-item-price">₹10 (4 Pieces) / ₹20 (6 Pieces)</div>
+                <div class="zomato-item-desc">Hot and soft handmade wheat rotis prepared fresh on order.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Plain Tadka', 35, 60, 'veg', 'Yellow lentils tempered with ghee, garlic, and aromatic spices.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Plain Tadka</div>
+                <div class="zomato-item-price">₹35 (Half) / ₹60 (Full)</div>
+                <div class="zomato-item-desc">Yellow lentils tempered with ghee, garlic, and aromatic spices.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Chilli Chicken', 80, 150, 'nonveg', 'Classic Indo-Chinese boneless chicken cooked with peppers and hot chilli sauce.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Chilli Chicken</div>
+                <div class="zomato-item-price">₹80 (Half) / ₹150 (Full)</div>
+                <div class="zomato-item-desc">Classic Indo-Chinese boneless chicken cooked with peppers and hot chilli sauce.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Chicken Curry', 70, 130, 'nonveg', 'Rich homestyle chicken gravy served hot for dinner.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="nonveg-icon-square"></span></div>
+                <div class="zomato-item-title">Chicken Curry</div>
+                <div class="zomato-item-price">₹70 (Half) / ₹130 (Full)</div>
+                <div class="zomato-item-desc">Rich homestyle chicken gravy served hot for dinner.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+          <li class="menu-item-li">
+            <div class="zomato-item-card" onclick="openItemModal('Veg Thali', 70, 70, 'veg', 'Wholesome dinner thali with Rice/Roti, Dal/Tadka, Veg Curry & Salad.')">
+              <div class="zomato-item-details">
+                <div class="zomato-badge-container"><span class="veg-icon-square"></span></div>
+                <div class="zomato-item-title">Veg Thali</div>
+                <div class="zomato-item-price">₹70 (Full Thali)</div>
+                <div class="zomato-item-desc">Wholesome dinner thali with Rice/Roti, Dal/Tadka, Veg Curry & Salad.</div>
+              </div>
+              <div class="zomato-action-box">
+                <button class="btn-add-initial">ADD</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="faq-section" id="faq">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-container">
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Is the food freshly prepared daily?</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          Yes! At Nibedita Kitchen, we prepare all meals fresh using pure ingredients, maintaining complete hygiene and authentic homestyle taste.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Can I schedule my food delivery for later?</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          Yes, you can easily schedule your order during checkout by selecting options like "After 45 minutes", "After 1 hour", or custom time slots.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>How do I place my order?</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          You can add items to your cart, fill in your delivery details in the checkout window, and click on "Place Order" to send your order directly via WhatsApp.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>What are the delivery timings for meals?</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          Breakfast is served from 7:00 AM to 10:30 AM, Lunch from 12:30 PM to 3:30 PM, and Dinner from 7:30 PM to 09:30 PM.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Do you have an FSSAI license for food safety?</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          Yes, Nibedita Kitchen is fully licensed and certified by FSSAI (Licence No: 22026004000383), ensuring the highest standards of quality, safety, and hygiene.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Do you provide monthly mess or tiffin services?</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          Yes, we offer regular homestyle tiffin services for students and working professionals. You can contact us directly via phone or WhatsApp for monthly packages.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>What payment methods are accepted?</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          We accept all major UPI payments (Google Pay, PhonePe, Paytm) and direct WhatsApp order bookings.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span>Is the food suitable for daily consumption (low oil/spices)?</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          Absolutely! Our food is cooked with minimal oil and balanced spices just like home-cooked meals, ensuring it is healthy and light on your stomach.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DYNAMIC ITEM POPUP MODAL -->
+  <div class="zomato-modal-overlay" id="zomatoItemModal">
+    <div class="zomato-modal-container">
+      <span class="zomato-modal-close-btn" onclick="closeZomatoItemModal()">&times;</span>
+      
+      <img src="https://i.postimg.cc/GpsTxfBN/Chat-GPT-Image-Aug-18-2026-10-49-09-AM.png" alt="Food Image" class="zomato-modal-hero-img" />
+      
+      <div class="zomato-modal-body">
+        <div class="zomato-modal-card-box">
+          <div id="zmModalBadge"><span class="veg-icon-square"></span></div>
+          <div class="zomato-modal-item-title" id="zmModalTitle">Item Name</div>
+          <div class="zomato-tag-reordered">Highly reordered</div>
+          <div class="zomato-modal-item-desc" id="zmModalDesc">Description here</div>
+        </div>
+
+        <div class="zomato-modal-card-box">
+          <div class="zomato-section-title">Select Category</div>
+          <div class="zomato-section-sub">Select 1 option</div>
+          
+          <div class="zomato-option-row">
+            <label class="zomato-radio-label">
+              <input type="radio" name="pack_option" value="Half" id="radioHalf" onchange="calculateModalTotal()" checked />
+              Half 
+            </label>
+            <span style="font-weight: 600; font-size: 0.88rem;" id="lblHalfPrice">₹0</span>
+          </div>
+          <div class="zomato-option-row" id="rowFullOption">
+            <label class="zomato-radio-label">
+              <input type="radio" name="pack_option" value="Full" id="radioFull" onchange="calculateModalTotal()" />
+              Full 
+            </label>
+            <span style="font-weight: 600; font-size: 0.88rem;" id="lblFullPrice">₹0</span>
+          </div>
+        </div>
+
+        <div class="zomato-modal-card-box">
+          <div class="zomato-section-title">Addons for your dish</div>
+          <div class="zomato-section-sub">Select optional add-ons</div>
+          <div id="addOnsContainer"></div>
+        </div>
+
+      </div>
+
+      <div class="zomato-bottom-bar">
+        <div class="zomato-qty-box">
+          <button class="zomato-qty-btn" onclick="changeZomatoModalQty(-1)">-</button>
+          <span class="zomato-qty-num" id="zmModalQty">1</span>
+          <button class="zomato-qty-btn" onclick="changeZomatoModalQty(1)">+</button>
+        </div>
+        <button class="zomato-add-item-btn" onclick="addItemToCartFromModal()">
+          Add Item <span id="zmModalBtnPrice" style="margin-left:8px;">₹0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT POPUP UI -->
+  <div class="checkout-modal-overlay" id="checkoutModal">
+    <div class="checkout-modal-container">
+      
+      <!-- Close Button -->
+      <div class="checkout-close-circle" onclick="closeCheckoutModal()">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+
+      <div class="checkout-body">
+
+        <!-- 1. ITEM CARDS WITH STEPPER -->
+        <div class="chk-card">
+          <div id="chkItemsList">
+            <!-- Dynamic Cart Items injected here -->
+          </div>
+
+          <div class="chk-add-more" onclick="closeCheckoutModal()">
+            <i class="fa-solid fa-plus"></i> Add more items
+          </div>
+        </div>
+
+        <!-- DELIVERY & BILL DETAILS SECTION -->
+        <div class="chk-card">
+          
+          <!-- Delivery Time -->
+          <div class="info-row">
+            <i class="fa-regular fa-clock info-icon"></i>
+            <div class="info-content">
+              <div class="info-title" id="deliveryTimeDisplay">Delivery in 30-35 mins</div>
+              <div class="info-link" onclick="toggleEditTime()">Want this later? Schedule it</div>
+              
+              <!-- Automated Schedule Options Box -->
+              <div class="schedule-options-box" id="scheduleOptionsBox">
+                <div class="schedule-option-item" onclick="selectScheduleTime('After 45 minutes')">⏱️ After 45 minutes</div>
+                <div class="schedule-option-item" onclick="selectScheduleTime('After 1 hour')">⏳ After 1 hour</div>
+                <div class="schedule-option-item" onclick="selectScheduleTime('After 1 & half hour')">⏰ After 1 & half hour</div>
+                <div class="schedule-option-item" onclick="selectScheduleTime('After 2 hours')">🕒 After 2 hours</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Delivery Address -->
+          <div class="info-row">
+            <i class="fa-solid fa-location-dot info-icon"></i>
+            <div class="info-content">
+              <div class="info-title">Delivery at Home</div>
+              <div class="info-sub" id="addressDisplay">Enter Your Full Address</div>
+              <div class="info-link" onclick="toggleEditAddress()">Add instructions / Change Address</div>
+              <div class="edit-input-box" id="addressEditBox">
+                <input type="text" id="customAddress" placeholder="Enter Proper Address or Pincode" value="Full Address" />
+                <button onclick="saveAddress()">Save Address</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Customer Phone & Name -->
+          <div class="info-row">
+            <i class="fa-solid fa-phone info-icon"></i>
+            <div class="info-content">
+              <div class="info-title" id="customerNameDisplay">Enter Your Full Name</div>
+              <div class="info-sub" id="customerPhoneDisplay">+91-xxxxxxxxxx</div>
+              <div class="info-link" onclick="toggleEditCustomer()">Edit Name & Mobile (Mandatory)</div>
+              <div class="edit-input-box" id="customerEditBox">
+                <input type="text" id="customName" placeholder="Your Name" value="Enter Your Full Name" />
+                <input type="text" id="customPhone" placeholder="Mobile Number" value="+91-xxxxxxxxxx" />
+                <button onclick="saveCustomer()">Save Details</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Total Bill Details -->
+          <div class="info-row" style="border-bottom:none;">
+            <i class="fa-solid fa-receipt info-icon"></i>
+            <div class="info-content">
+              <div class="info-title" style="display:flex; align-items:center; flex-wrap:wrap; gap:4px;">
+                Total Bill 
+                <span id="chkFinalPrice" style="color:#1c1c1c; font-weight:700; margin-left: 4px;">₹93</span>
+              </div>
+              <div class="info-sub" id="deliveryChargeBreakdown">Item Total: ₹0 | Delivery: ₹00 (<span id="calculatedDistanceDisplay">0 km</span>)</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- CANCELLATION POLICY -->
+        <div class="cancellation-policy">
+          <strong>CANCELLATION POLICY:</strong> A 100% cancellation charge will apply. This helps us compensate the restaurant partner for food preparation.
+        </div>
+
+      </div>
+
+      <!-- STICKY BOTTOM CHECKOUT BAR -->
+      <div class="checkout-bottom-bar">
+        <div class="pay-using-box">
+          <span class="pay-using-title">Pay Using</span>
+          <span class="pay-using-method"><i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 1.1rem;"></i> WhatsApp / UPI</span>
+        </div>
+        <a href="#" id="chkWaPlaceOrderBtn" target="_blank" class="btn-place-order" onclick="return validateAndPlaceOrder()">
+          <span id="chkBtnTotal">₹93</span>
+          <span>Place Order</span>
+          <i class="fa-solid fa-caret-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer id="contact">
+    <div class="footer-grid">
+      <div class="footer-box"><h4>CONTACT US</h4><p><strong>Phone:</strong> +91 7846986313, +91 7894984976</p><p><strong>ADDRESS:</strong> MANDAPADA, DOULATABAD, CHOUDWAR, CUTTACK 754026 </p></div>
+      
+      <div class="footer-box">
+        <div class="fssai-badge-box">
+          <img src="https://i.postimg.cc/4NF7cGLz/1000426082-removebg-preview.png" alt="FSSAI Logo" style="width: 55px; height: auto; background: #fff; padding: 3px; border-radius: 4px;" />
+          <div>
+            <p style="font-size: 0.95rem; font-weight: 700; color: #ffffff;">FSSAI Certified</p>
+            <p style="color: var(--gold-light); font-weight: 700; font-size: 0.8rem;">Lic No: 22026004000383</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-box"><h4>OUR QUALITY GUARANTEE</h4><p>Hygienic preparation, fresh daily stock, low oil, and authentic homestyle taste.</p></div>
+    </div>
+    <div class="footer-bottom"><p>THANK YOU FOR SUPPORTING US ❤️ | &copy; 2026 Nibedita Kitchen. All Rights Reserved.</p></div>
+  </footer>
+
+  <script>
+    // ============================================================
+    // NIBEDITA KITCHEN BASE HUB: MANDAPADA (754026)
+    // Dynamic Area Pincode & Distance Pricing System
+    // ============================================================
+    const KITCHEN_LAT = 20.4625;
+    const KITCHEN_LON = 85.8828;
+
+    const pincodeCharges = {
+      // --- 3 KM KE ANDAR (Delivery Fee: ₹30) ---
+      "754026": { location: "Mandapada (Nibedita Kitchen Base Hub)", fee: 30 },
+      "754025": { location: "Choudwar / OTM Area", fee: 30 },
+      "754027": { location: "Charbatia / Agrahat", fee: 30 },
+      "754071": { location: "Tangi Choudwar / Kalinganagar", fee: 30 },
+
+      // --- 3 KM SE JYADA / CUTTACK CITY & OTHERS (Delivery Fee: ₹60) ---
+      "753001": { location: "Cuttack GPO / Buxi Bazaar", fee: 60 },
+      "753002": { location: "College Square / Jobra / Malgodown", fee: 60 },
+      "753003": { location: "Cantonment / Barabati / Collectorate", fee: 60 },
+      "753004": { location: "SCB Medical / Mangalabag / Ranihat", fee: 60 },
+      "753006": { location: "Chauliaganj / Nayabazar", fee: 60 },
+      "753007": { location: "Madhupatna / Link Road", fee: 60 },
+      "753008": { location: "Badambadi / Industrial Estate", fee: 60 },
+      "753009": { location: "CDA Sector 6 to 11 / Bidanasi", fee: 60 },
+      "753010": { location: "Mahanadi Vihar / Shikharpur", fee: 60 },
+      "753011": { location: "Jagatpur Phase 1 / Arilo", fee: 60 },
+      "753012": { location: "Jagatpur Industrial Estate / Khapuria", fee: 60 },
+      "753013": { location: "CDA Sector 1 to 5 / Markat Nagar", fee: 60 },
+      "753014": { location: "CDA Sector 12, 13, 14", fee: 60 },
+      "753015": { location: "Satyabadi Outer", fee: 60 },
+      "754001": { location: "Kandarpur", fee: 60 },
+      "754002": { location: "42 Mouza / Bentakar", fee: 60 },
+      "754005": { location: "Barang / Trishulia", fee: 60 },
+      "754200": { location: "Salipur", fee: 60 }
+    };
+
+    let calculatedDistanceKm = 0;
+    let calculatedDeliveryCharge = 30; // Default base charge
+
+    let cartList = [];
+
+    let deliveryTimeInfo = "Delivery in 30-35 mins";
+    let customerAddress = "Your Full Address";
+    let customerName = "Full Name";
+    let customerPhone = "Mobile Number";
+
+    let currentItem = {
+      name: '',
+      halfPrice: 0,
+      fullPrice: 0,
+      type: 'veg',
+      desc: '',
+      qty: 1
+    };
+
+    // Addons Database Updated with your new snacks and add-on items
+    const addOnDatabase = {
+      breakfast: [
+        { name: 'Extra Curry', price: 15 },
+        { name: 'Pudina Chutney & Salad', price: 10 },
+        { name: 'Amul Butter Cube', price: 12 },
+        { name: 'Chowmin (Half)', price: 40 },
+        { name: 'Chowmin (Full)', price: 60 },
+        { name: 'Single Egg Roll', price: 30 },
+        { name: 'Double Egg Roll', price: 60 },
+        { name: 'Chicken Chop', price: 20 },
+        { name: 'Chicken Samosa (2 Pcs)', price: 15 },
+        { name: 'Bread Chop', price: 15 },
+        { name: 'Mughlai Paratha (5 Pcs)', price: 50 },
+        { name: 'Chicken Pakoda (Half)', price: 40 },
+        { name: 'Chicken Pakoda (Full)', price: 70 }
+      ],
+      curry: [
+        { name: 'Extra Gravy', price: 15 },
+        { name: 'Green Salad', price: 20 },
+        { name: 'Dahi / Curd Bowl', price: 25 },
+        { name: 'Fried Papad (2 Pcs)', price: 15 },
+        { name: 'Chowmin (Half)', price: 40 },
+        { name: 'Chowmin (Full)', price: 60 },
+        { name: 'Single Egg Roll', price: 35 },
+        { name: 'Double Egg Roll', price: 45 },
+        { name: 'Chicken Chop', price: 20 },
+        { name: 'Chicken Samosa', price: 15 },
+        { name: 'Bread Chop', price: 15 },
+        { name: 'Mughlai Paratha', price: 50 },
+        { name: 'Chicken Pakoda (Half)', price: 40 },
+        { name: 'Chicken Pakoda (Full)', price: 70 }
+      ]
+    };
+
+    function calculateDistanceInKm(lat1, lon1, lat2, lon2) {
+      const R = 6371; 
+      const dLat = (lat2 - lat1) * (Math.PI / 180);
+      const dLon = (lon2 - lon1) * (Math.PI / 180);
+      const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * 
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c;
+    }
+
+    async function updateDeliveryChargeForAddress(addressText) {
+      if (!addressText || addressText.trim() === "") return;
+
+      const pinMatch = addressText.match(/\b\d{6}\b/);
+
+      if (pinMatch) {
+        const pin = pinMatch[0];
+        if (pincodeCharges[pin]) {
+          calculatedDeliveryCharge = pincodeCharges[pin].fee;
+          calculatedDistanceKm = pincodeCharges[pin].fee === 30 ? "< 3" : "> 3";
+          renderCheckoutUI();
+          return;
+        }
+      }
+
+      try {
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(addressText)}`);
+        const data = await response.json();
+
+        if (data && data.length > 0) {
+          const userLat = parseFloat(data[0].lat);
+          const userLon = parseFloat(data[0].lon);
+
+          const distance = calculateDistanceInKm(KITCHEN_LAT, KITCHEN_LON, userLat, userLon);
+          calculatedDistanceKm = distance.toFixed(1);
+
+          if (distance > 3) {
+            calculatedDeliveryCharge = 60;
+          } else {
+            calculatedDeliveryCharge = 30;
+          }
+        } else {
+          calculatedDistanceKm = 0;
+          calculatedDeliveryCharge = 30;
+        }
+      } catch (err) {
+        console.error("Geocoding Error:", err);
+        calculatedDistanceKm = 0;
+        calculatedDeliveryCharge = 30;
+      }
+
+      renderCheckoutUI();
+    }
+
+    function toggleFaq(element) {
+      const parentItem = element.parentElement;
+      const allItems = document.querySelectorAll('.faq-item');
+      
+      allItems.forEach(item => {
+        if(item !== parentItem) {
+          item.classList.remove('active');
+        }
+      });
+      
+      parentItem.classList.toggle('active');
+    }
+
+    function openItemModal(name, halfP, fullP, type, desc) {
+      currentItem = { name, halfPrice: halfP, fullPrice: fullP, type, desc, qty: 1 };
+      
+      document.getElementById('zmModalTitle').innerText = name;
+      document.getElementById('zmModalDesc').innerText = desc;
+      document.getElementById('zmModalQty').innerText = 1;
+      document.getElementById('radioHalf').checked = true;
+
+      document.getElementById('lblHalfPrice').innerText = '₹' + halfP;
+      
+      const fullRow = document.getElementById('rowFullOption');
+      if (halfP === fullP) {
+        fullRow.style.display = 'none';
+      } else {
+        fullRow.style.display = 'flex';
+        document.getElementById('lblFullPrice').innerText = '₹' + fullP;
+      }
+
+      const badgeContainer = document.getElementById('zmModalBadge');
+      badgeContainer.innerHTML = (type === 'veg') ? '<span class="veg-icon-square"></span>' : '<span class="nonveg-icon-square"></span>';
+
+      const addOnsBox = document.getElementById('addOnsContainer');
+      addOnsBox.innerHTML = '';
+      
+      let isBreakfastItem = ['Puri', 'Paratha', 'Aloo Paratha', 'Onion Paratha', 'Chicken Paratha', 'Bread Omelette', 'Dal Puri', 'Upma', 'Idli', 'Poha', 'Chole Bhature', 'Ruti', 'Chakuli'].includes(name);
+      let selectedAddons = isBreakfastItem ? addOnDatabase.breakfast : addOnDatabase.curry;
+
+      selectedAddons.forEach((addon) => {
+        const row = document.createElement('div');
+        row.className = 'zomato-option-row';
+        row.innerHTML = `
+          <label class="zomato-radio-label">
+            <input type="checkbox" class="modal-addon-checkbox" value="${addon.price}" data-name="${addon.name}" onchange="calculateModalTotal()" />
+            ${addon.name}
+          </label>
+          <span style="font-weight: 600; font-size: 0.85rem;">+₹${addon.price}</span>
+        `;
+        addOnsBox.appendChild(row);
+      });
+
+      calculateModalTotal();
+      document.getElementById('zomatoItemModal').style.display = 'flex';
+    }
+
+    function closeZomatoItemModal() {
+      document.getElementById('zomatoItemModal').style.display = 'none';
+    }
+
+    function changeZomatoModalQty(delta) {
+      if (currentItem.qty + delta >= 1) {
+        currentItem.qty += delta;
+        document.getElementById('zmModalQty').innerText = currentItem.qty;
+        calculateModalTotal();
+      }
+    }
+
+    function calculateModalTotal() {
+      const isFull = document.getElementById('radioFull').checked;
+      let basePrice = (isFull && currentItem.halfPrice !== currentItem.fullPrice) ? currentItem.fullPrice : currentItem.halfPrice;
+      
+      let addonTotal = 0;
+      document.querySelectorAll('.modal-addon-checkbox:checked').forEach(cb => {
+        addonTotal += parseFloat(cb.value);
+      });
+
+      let finalUnitPrice = basePrice + addonTotal;
+      let grandTotal = finalUnitPrice * currentItem.qty;
+
+      document.getElementById('zmModalBtnPrice').innerText = '₹' + grandTotal;
+      return grandTotal;
+    }
+
+    function addItemToCartFromModal() {
+      const isFull = document.getElementById('radioFull').checked;
+      const packType = (isFull && currentItem.halfPrice !== currentItem.fullPrice) ? 'Full' : 'Half / Standard';
+      let basePrice = (isFull && currentItem.halfPrice !== currentItem.fullPrice) ? currentItem.fullPrice : currentItem.halfPrice;
+
+      let chosenAddons = [];
+      let addonTotal = 0;
+      document.querySelectorAll('.modal-addon-checkbox:checked').forEach(cb => {
+        chosenAddons.push(cb.getAttribute('data-name'));
+        addonTotal += parseFloat(cb.value);
+      });
+
+      let singleUnitPrice = basePrice + addonTotal;
+
+      const cartItem = {
+        id: Date.now(),
+        name: currentItem.name,
+        type: currentItem.type,
+        pack: packType,
+        addons: chosenAddons,
+        qty: currentItem.qty,
+        unitPrice: singleUnitPrice,
+        totalPrice: singleUnitPrice * currentItem.qty
+      };
+
+      cartList.push(cartItem);
+      updateCartCount();
+      closeZomatoItemModal();
+      openCheckoutModal();
+    }
+
+    function updateCartCount() {
+      let totalItemsCount = cartList.reduce((acc, item) => acc + item.qty, 0);
+      document.getElementById('cartCount').innerText = totalItemsCount;
+    }
+
+    function changeCheckoutQty(index, delta) {
+      if (cartList[index]) {
+        cartList[index].qty += delta;
+        if (cartList[index].qty <= 0) {
+          cartList.splice(index, 1);
+        } else {
+          cartList[index].totalPrice = cartList[index].unitPrice * cartList[index].qty;
+        }
+        updateCartCount();
+        renderCheckoutUI();
+      }
+    }
+
+    function toggleEditTime() {
+      let box = document.getElementById('scheduleOptionsBox');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function selectScheduleTime(timeStr) {
+      deliveryTimeInfo = timeStr;
+      document.getElementById('deliveryTimeDisplay').innerText = deliveryTimeInfo;
+      document.getElementById('scheduleOptionsBox').style.display = 'none';
+      updateWhatsAppLink();
+    }
+
+    function toggleEditAddress() {
+      let box = document.getElementById('addressEditBox');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+
+    async function saveAddress() {
+      let val = document.getElementById('customAddress').value.trim();
+      if(val) { 
+        customerAddress = val; 
+        document.getElementById('addressDisplay').innerText = customerAddress; 
+        await updateDeliveryChargeForAddress(customerAddress);
+      }
+      document.getElementById('addressEditBox').style.display = 'none';
+    }
+
+    function toggleEditCustomer() {
+      let box = document.getElementById('customerEditBox');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+    function saveCustomer() {
+      let nVal = document.getElementById('customName').value.trim();
+      let pVal = document.getElementById('customPhone').value.trim();
+      if(nVal && pVal) {
+        customerName = nVal; customerPhone = pVal;
+        document.getElementById('customerNameDisplay').innerText = customerName;
+        document.getElementById('customerPhoneDisplay').innerText = customerPhone;
+      }
+      document.getElementById('customerEditBox').style.display = 'none';
+      updateWhatsAppLink();
+    }
+
+    function renderCheckoutUI() {
+      const listContainer = document.getElementById('chkItemsList');
+      
+      document.getElementById('deliveryTimeDisplay').innerText = deliveryTimeInfo;
+      document.getElementById('addressDisplay').innerText = customerAddress;
+      document.getElementById('customerNameDisplay').innerText = customerName;
+      document.getElementById('customerPhoneDisplay').innerText = customerPhone;
+
+      if (cartList.length === 0) {
+        listContainer.innerHTML = `<p style="text-align:center; color:#888; font-size:0.9rem; padding:15px 0;">Your cart is empty.</p>`;
+        document.getElementById('chkFinalPrice').innerText = '₹0';
+        document.getElementById('chkBtnTotal').innerText = '₹0';
+        document.getElementById('deliveryChargeBreakdown').innerHTML = `Item Total: ₹0 | Delivery: ₹${calculatedDeliveryCharge} (${calculatedDistanceKm} km)`;
+        return;
+      }
+
+      let rawTotal = 0;
+      let html = '';
+
+      cartList.forEach((item, idx) => {
+        rawTotal += item.totalPrice;
+        const iconBadge = (item.type === 'veg') ? '<span class="veg-icon-square"></span>' : '<span class="nonveg-icon-square"></span>';
+        
+        html += `
+          <div class="chk-item-row">
+            <div class="chk-item-left">
+              <div style="margin-top:2px;">${iconBadge}</div>
+              <div>
+                <div class="chk-item-title">${item.name}</div>
+                <div class="chk-item-meta">${item.pack} Plate ${item.addons.length > 0 ? '+ ' + item.addons.join(', ') : ''}</div>
+              </div>
+            </div>
+            <div class="chk-stepper">
+              <button class="chk-step-btn" onclick="changeCheckoutQty(${idx}, -1)">-</button>
+              <span class="chk-step-val">${item.qty}</span>
+              <button class="chk-step-btn" onclick="changeCheckoutQty(${idx}, 1)">+</button>
+            </div>
+            <div class="chk-item-price">₹${item.totalPrice}</div>
+          </div>
+        `;
+      });
+
+      listContainer.innerHTML = html;
+
+      let grandTotal = rawTotal + calculatedDeliveryCharge;
+
+      document.getElementById('chkFinalPrice').innerText = '₹' + grandTotal;
+      document.getElementById('chkBtnTotal').innerText = '₹' + grandTotal;
+      document.getElementById('deliveryChargeBreakdown').innerHTML = `Item Total: ₹${rawTotal} | Delivery: ₹${calculatedDeliveryCharge} (${calculatedDistanceKm} km)`;
+
+      updateWhatsAppLink();
+    }
+
+    function updateWhatsAppLink() {
+      let rawTotal = cartList.reduce((acc, item) => acc + item.totalPrice, 0);
+      let grandTotal = rawTotal + calculatedDeliveryCharge;
+
+      const phone = "919078776313";
+      let msg = `Hello Nibedita Kitchen, I want to place an order:\n\n`;
+      cartList.forEach(i => {
+        msg += `• ${i.name} (${i.pack}) x${i.qty} = ₹${i.totalPrice}\n`;
+        if(i.addons.length > 0) msg += `  Addons: ${i.addons.join(', ')}\n`;
+      });
+      msg += `\n*Item Total:* ₹${rawTotal}\n`;
+      msg += `*Delivery Charge:* ₹${calculatedDeliveryCharge} (${calculatedDistanceKm} km)\n`;
+      msg += `*Grand Total Bill:* ₹${grandTotal}\n\n`;
+      msg += `*Delivery Time:* ${deliveryTimeInfo}\n`;
+      msg += `*Delivery Address:* ${customerAddress}\n`;
+      msg += `*Customer Name:* ${customerName}\n`;
+      msg += `*Mobile Number:* ${customerPhone}`;
+
+      document.getElementById('chkWaPlaceOrderBtn').href = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function validateAndPlaceOrder() {
+      if(cartList.length === 0) {
+        alert("Please add items to your cart first!");
+        return false;
+      }
+      if(!customerAddress.trim() || customerAddress.length < 5) {
+        alert("Please enter a proper mandatory delivery address!");
+        toggleEditAddress();
+        return false;
+      }
+      if(!customerName.trim() || !customerPhone.trim() || customerPhone.length < 10) {
+        alert("Please enter mandatory valid Name and Mobile Number!");
+        toggleEditCustomer();
+        return false;
+      }
+      return true;
+    }
+
+    async function openCheckoutModal() {
+      await updateDeliveryChargeForAddress(customerAddress);
+      renderCheckoutUI();
+      document.getElementById('checkoutModal').style.display = 'flex';
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').style.display = 'none';
+    }
+
+    function scrollToCategory(cardId) {
+      const targetCard = document.getElementById(cardId);
+      const slider = document.getElementById('menuSlider');
+      if (targetCard && slider) {
+        const targetLeft = targetCard.offsetLeft - slider.offsetLeft;
+        slider.scrollTo({ left: targetLeft, behavior: 'smooth' });
+      }
+      document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Auto active-tab toggle on category horizontal scroll
+    const observerOptions = { root: document.getElementById('menuSlider'), threshold: 0.6 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const catId = entry.target.getAttribute('data-cat');
+          document.querySelectorAll('.zm-cat-item').forEach(tab => tab.classList.remove('active'));
+          const activeTab = document.getElementById('tab-' + catId);
+          if (activeTab) activeTab.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.menu-category-card').forEach(card => observer.observe(card));
+  </script>
+</body>
+</html>
