@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+here<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -189,7 +189,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* UPDATED COMPACT & MOBILE-FRIENDLY STICKY TOPBAR */
+    /* COMPACT & MOBILE-FRIENDLY STICKY TOPBAR */
     .modal-sticky-topbar {
       position: sticky;
       top: 0;
@@ -259,7 +259,24 @@
     .meta-box strong { font-size: 0.95rem; color: var(--crimson-main); font-weight: 700; margin-top: 2px; display: block; }
 
     .modal-download-box { text-align: center; background: #ffffff; padding: 20px 15px; border-radius: 14px; border: 1px solid var(--border-gold); margin-bottom: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
-    .btn-direct-download { background: linear-gradient(135deg, var(--crimson-main) 0%, var(--crimson-dark) 100%); color: #fff; padding: 12px 30px; border: 2px solid var(--gold-main); border-radius: 25px; font-size: 1rem; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 6px 18px rgba(122, 12, 12, 0.3); transition: all 0.3s ease; }
+    
+    /* 1-CLICK DIRECT APK DOWNLOAD BUTTON */
+    .btn-direct-download { 
+      background: linear-gradient(135deg, var(--crimson-main) 0%, var(--crimson-dark) 100%); 
+      color: #fff; 
+      padding: 12px 30px; 
+      border: 2px solid var(--gold-main); 
+      border-radius: 25px; 
+      font-size: 1rem; 
+      font-weight: 700; 
+      cursor: pointer; 
+      text-decoration: none; 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 10px; 
+      box-shadow: 0 6px 18px rgba(122, 12, 12, 0.3); 
+      transition: all 0.3s ease; 
+    }
     .btn-direct-download:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(122, 12, 12, 0.45); }
 
     /* App Screenshots Horizontal Scrollable Gallery */
@@ -438,7 +455,7 @@
         <li><i class="fa-solid fa-cake-candles"></i> Perfect for Parties, Birthdays & Events</li>
       </ul>
 
-      <!-- Button inside the section with onclick Modal trigger -->
+      <!-- Button inside section triggering Modal -->
       <a href="javascript:void(0)" onclick="openAppModal()" class="btn-hero">Download App Now</a>
     </div>
     <div class="app-mockup-container">
@@ -452,7 +469,7 @@
   <div class="app-modal-overlay" id="appModalOverlay" onclick="closeAppModalOnOutside(event)">
     <div class="app-modal-card">
       
-      <!-- UPDATED COMPACT & MOBILE FRIENDLY TOPBAR -->
+      <!-- COMPACT & MOBILE FRIENDLY TOPBAR -->
       <div class="modal-sticky-topbar">
         <button class="close-modal-btn-top" onclick="closeAppModal()">
           <i class="fa-solid fa-arrow-left"></i> Back
@@ -494,12 +511,12 @@
         </div>
       </div>
 
-      <!-- Action Button Download Box -->
+      <!-- Action Button: 1-CLICK DIRECT APK DOWNLOAD -->
       <div class="modal-download-box">
-        <a href="https://mega.nz/file/b2xkDLYA#bRpyFrqwcaHJiJwgAZlIV756LMc7nmjdN-d41PzoSq8" target="_blank" class="btn-direct-download">
+        <a href="NibeditaKitchen.apk" download="NibeditaKitchen.apk" class="btn-direct-download">
           <i class="fa-solid fa-download"></i> Download Official APK (17.0 MB)
         </a>
-        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px;">Direct High-Speed Server • Safe & Secure Installation • Zero Ads</p>
+        <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 10px;">Direct High-Speed Download • Safe & Secure Installation • Zero Ads</p>
       </div>
 
       <!-- App Screenshots Gallery Row -->
@@ -509,7 +526,6 @@
         <img src="https://i.postimg.cc/KjLhTjxJ/Screenshot-2026-09-05-10-24-55-674-com-customer-mywebapp.jpg" alt="App Preview 2">
         <img src="https://i.postimg.cc/QC5Z7Chx/Screenshot-2026-09-05-10-25-21-577-com-customer-mywebapp.jpg" alt="App Preview 3">
         <img src="https://i.postimg.cc/XJS8JYHs/Screenshot-2026-09-05-10-25-30-030-com-customer-mywebapp.jpg" alt="App Preview 4">
-      </div>
       </div>
 
       <!-- About the App Section -->
@@ -554,7 +570,7 @@
       <!-- Full Installation Guide -->
       <h4 class="modal-section-title">How to Install APK File?</h4>
       <ol class="install-steps-list">
-        <li>Click on the <strong>Download Official APK</strong> button above to download the setup file.</li>
+        <li>Click on the <strong>Download Official APK</strong> button above to start direct download.</li>
         <li>If prompted by your mobile browser (Chrome/Edge), tap <strong>"Download Anyway"</strong>.</li>
         <li>Open your Android Phone <strong>Settings &gt; Security / Privacy</strong> and enable <strong>"Install from Unknown Sources"</strong> if required.</li>
         <li>Locate the downloaded file in your <strong>File Manager / Downloads folder</strong>.</li>
@@ -563,7 +579,7 @@
     </div>
   </div>
 
-  <!-- FAQ SECTION (8 ITEMS INTACT) -->
+  <!-- FAQ SECTION (ALL 8 ITEMS INTACT) -->
   <section class="faq-section" id="faq">
     <h2 class="section-title">Frequently Asked Questions</h2>
     <div class="faq-container">
@@ -658,7 +674,11 @@
 
   <footer id="contact">
     <div class="footer-grid">
-      <div class="footer-box"><h4>CONTACT US</h4><p><strong>Phone:</strong> +91 7846986313, +91 7894984976</p><p><strong>ADDRESS:</strong> MANDAPADA, DOULATABAD, CHOUDWAR, CUTTACK 754026 </p></div>
+      <div class="footer-box">
+        <h4>CONTACT US</h4>
+        <p><strong>Phone:</strong> +91 7846986313, +91 7894984976</p>
+        <p><strong>ADDRESS:</strong> MANDAPADA, DOULATABAD, CHOUDWAR, CUTTACK 754026 </p>
+      </div>
       
       <div class="footer-box">
         <div class="fssai-badge-box">
@@ -670,9 +690,14 @@
         </div>
       </div>
 
-      <div class="footer-box"><h4>OUR QUALITY GUARANTEE</h4><p>Hygienic preparation, fresh daily stock, low oil, and authentic homestyle taste.</p></div>
+      <div class="footer-box">
+        <h4>OUR QUALITY GUARANTEE</h4>
+        <p>Hygienic preparation, fresh daily stock, low oil, and authentic homestyle taste.</p>
+      </div>
     </div>
-    <div class="footer-bottom"><p>THANK YOU FOR SUPPORTING US ❤️ | &copy; 2026 Nibedita Kitchen. All Rights Reserved.</p></div>
+    <div class="footer-bottom">
+      <p>THANK YOU FOR SUPPORTING US ❤️ | &copy; 2026 Nibedita Kitchen. All Rights Reserved.</p>
+    </div>
   </footer>
 
   <script>
@@ -707,4 +732,4 @@
     }
   </script>
 </body>
-        </html>
+  </html>
